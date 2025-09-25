@@ -1,0 +1,77 @@
+@use 'mixin' as m;
+@use 'variable' as v;
+
+body {
+    margin: 0;
+}
+
+.header {
+    width: 400px;
+    height: 100px;
+    background-color: v.$navy;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    // padding: 20px 20px;
+
+        &__boxes {
+            display: flex;
+            gap: 10px;
+            margin: 20px;
+
+            > .header__box {
+                @include m.box(40px, 40px);
+                border: 10px solid v.$white;
+
+            @each $name in v.$classNames {
+                $index_key: index(v.$classNames, $name);
+
+                &:nth-child(#{$index_key}) {
+                background-color: nth(v.$buttonColor, $index_key);
+                }
+            }
+        }
+    }
+}
+
+.container {
+    display: flex;
+
+    .sidebar {
+        width: 150px;
+        height: 250px;
+        background-color: v.$green;
+    }
+
+    .main {
+        width: 250px;
+        height: 250px;
+        background-color: v.$red;
+
+        .main__boxes {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 40px 0 0 40px;
+
+            > .main__box {
+                @include m.box(140px, 40px);
+                border: 5px solid v.$white;
+
+                @each $name in v.$classNames {
+                    $index_key: index(v.$classNames, $name);
+
+                    &:nth-child(#{$index_key}) {
+                    background-color: nth(v.$buttonColor, $index_key);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.footer {
+    height: 100px;
+    width: 400px;
+    background-color: v.$brown;
+}
